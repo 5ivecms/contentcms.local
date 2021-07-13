@@ -6,6 +6,7 @@
 
 use yii\helpers\Url;
 
+$placeholder = '/themes/' . \common\models\Themes::current() . '/assets/images/placeholder.jpg';
 ?>
 
 <div itemscope="" itemtype="http://schema.org/Article">
@@ -57,6 +58,16 @@ use yii\helpers\Url;
                                              src="<?= $article['thumb'] ?>"
                                              class="attachment-thumb-wide size-thumb-wide wp-post-image"
                                              alt="<?= $article['title'] ?>" loading="lazy" itemprop="image"
+                                        />
+                                    <?php else: ?>
+                                        <img
+                                                width="330"
+                                                height="140"
+                                                src="<?= $placeholder ?>"
+                                                class="attachment-thumb-wide size-thumb-wide wp-post-image"
+                                                alt="<?= $article['title'] ?>"
+                                                loading="lazy"
+                                                itemprop="image"
                                         />
                                     <?php endif; ?>
                                 </a>

@@ -7,6 +7,8 @@
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 
+$placeholder = '/themes/' . \common\models\Themes::current() . '/assets/images/placeholder.jpg';
+
 ?>
 
 <?php if ($settings['h1']): ?>
@@ -23,10 +25,24 @@ use yii\helpers\Url;
             <div class="post-card__image">
                 <a href="<?= Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
                     <?php if ($article['thumb']): ?>
-                        <img width="330" height="140"
-                             src="<?= $article['thumb'] ?>"
-                             class="attachment-thumb-wide size-thumb-wide wp-post-image"
-                             alt="<?= $article['title'] ?>" loading="lazy" itemprop="image"
+                        <img
+                                width="330"
+                                height="140"
+                                src="<?= $article['thumb'] ?>"
+                                class="attachment-thumb-wide size-thumb-wide wp-post-image"
+                                alt="<?= $article['title'] ?>"
+                                loading="lazy"
+                                itemprop="image"
+                        />
+                    <?php else: ?>
+                        <img
+                                width="330"
+                                height="140"
+                                src="<?= $placeholder ?>"
+                                class="attachment-thumb-wide size-thumb-wide wp-post-image"
+                                alt="<?= $article['title'] ?>"
+                                loading="lazy"
+                                itemprop="image"
                         />
                     <?php endif; ?>
                 </a>

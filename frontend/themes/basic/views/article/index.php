@@ -9,6 +9,7 @@
 use yii\bootstrap4\LinkPager;
 use yii\helpers\Url;
 
+$placeholder = '/themes/' . \common\models\Themes::current() . '/assets/images/placeholder.jpg';
 ?>
 
 <?php if ($settings['h1']): ?>
@@ -43,6 +44,16 @@ use yii\helpers\Url;
                             loading="lazy"
                             itemprop="image"
                     />
+                    <?php else: ?>
+                        <img
+                                width="770"
+                                height="330"
+                                src="<?= $placeholder ?>"
+                                class="attachment-thumb-big size-thumb-big wp-post-image"
+                                alt="<?= $article['title'] ?>"
+                                loading="lazy"
+                                itemprop="image"
+                        />
                     <?php endif; ?>
                 </a>
             </div>
