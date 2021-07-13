@@ -43,3 +43,4 @@ phpunit.phar
 /backend/web/robots.txt
 /storage/*
 /frontend/web/sitemap/*
+contentcmd.zip
