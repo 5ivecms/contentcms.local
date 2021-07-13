@@ -51,8 +51,8 @@ $placeholder = '/themes/' . \common\models\Themes::current() . '/assets/images/p
             <meta itemprop="author" content="Admin">
             <meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage"
                   itemid="<?= Yii::$app->request->hostInfo . Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
-            <meta itemprop="dateModified" content="2018-12-27">
-            <meta itemprop="datePublished" content="2018-12-27T13:23:05+03:00">
+            <meta itemprop="dateModified" content="<?= date('Y-m-d', strtotime($article['updated_at'])) ?>">
+            <meta itemprop="datePublished" content="<?= date('Y-m-d', strtotime($article['created_at'])) ?>">
         </article>
     <?php endforeach; ?>
 </div>

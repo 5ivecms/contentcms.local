@@ -13,18 +13,6 @@ use common\models\LoginForm;
 class SiteController extends BaseController
 {
     /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
-    /**
      * Displays homepage.
      *
      * @return string

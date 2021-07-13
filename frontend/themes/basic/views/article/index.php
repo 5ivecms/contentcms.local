@@ -64,7 +64,8 @@ $placeholder = '/themes/' . \common\models\Themes::current() . '/assets/images/p
                 <a href="<?=  Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>" class="entry-footer__more">Читать полностью</a>
             </footer>
             <meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="<?= Yii::$app->request->hostInfo . Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
-            <meta itemprop="dateModified" content="2018-12-25">
+            <meta itemprop="dateModified" content="<?= date('Y-m-d', strtotime($article['updated_at'])) ?>">
+            <meta itemprop="datePublished" content="<?= date('Y-m-d', strtotime($article['created_at'])) ?>">
         </article>
     <?php endforeach; ?>
 </div>

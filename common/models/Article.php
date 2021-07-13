@@ -3,6 +3,9 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\Inflector;
 
 /**
@@ -17,7 +20,8 @@ use yii\helpers\Inflector;
  * @property string|null $meta_description
  * @property string|null $thumb
  * @property string|null $table_contents
- * @property int $views
+ * @property string|null $created_at
+ * @property string|null $updated_at
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -38,6 +42,21 @@ class Article extends \yii\db\ActiveRecord
             [['text', 'short_text', 'thumb', 'table_contents'], 'string'],
             [['title', 'slug', 'meta_title', 'meta_description'], 'string', 'max' => 255],
             [['views'], 'integer'],
+            [['created_at', 'updated_at'], 'safe']
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
@@ -56,7 +75,9 @@ class Article extends \yii\db\ActiveRecord
             'meta_description' => 'Meta Description',
             'thumb' => 'Миниатюра',
             'table_contents' => 'Содержание',
-            'views' => 'Просмотров'
+            'views' => 'Просмотров',
+            'created_at' => 'Добавлено',
+            'updated_at' => 'Изменено',
         ];
     }
 

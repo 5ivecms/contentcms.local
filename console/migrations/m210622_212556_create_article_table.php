@@ -27,7 +27,9 @@ class m210622_212556_create_article_table extends Migration
             'table_contents' => $this->getDb()->getSchema()->createColumnSchemaBuilder('longtext'),
             'meta_title' => $this->string(255),
             'meta_description' => $this->string(255),
-            'views' => $this->integer()->defaultValue(0)
+            'views' => $this->integer()->defaultValue(0),
+            'created_at' => $this->dateTime(),
+            'updated_at' => $this->dateTime(),
         ], $tableOptions);
 
         $this->createIndex(
