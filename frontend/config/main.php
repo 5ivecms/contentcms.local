@@ -42,5 +42,6 @@ return [
         'urlManager' => require __DIR__ . '/_urlManager.php',
 
     ],
+
     'params' => $params,
 ];

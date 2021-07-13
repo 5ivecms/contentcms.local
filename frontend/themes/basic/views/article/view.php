@@ -8,37 +8,72 @@ use yii\helpers\Url;
 
 ?>
 
-<h1><?= $article['title'] ?></h1>
+<div itemscope="" itemtype="http://schema.org/Article">
+    <main id="main" class="site-main">
+        <article class="post">
+            <header class="entry-header">
+                <h1 class="entry-title" itemprop="headline"><?= $article['title'] ?></h1>
+            </header>
+            <?php if ($settings['thumb.show']): ?>
+                <?php if ($article['thumb']): ?>
+                    <div class="entry-image">
+                        <img
+                                width="800"
+                                height="522"
+                                src="<?= $article['thumb']; ?>"
+                                class="attachment-full size-full wp-post-image"
+                                alt="<?= $article['title'] ?>"
+                                loading="lazy"
+                                itemprop="image"
+                        />
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+            <div class="entry-content" itemprop="articleBody">
+                <?php if ($settings['tableContents.show'] && $article['table_contents']): ?>
+                    <div id="toc_container" class="toc no_bullets">
+                        <p class="toc__title">Содержание</p>
+                        <?= $article['table_contents']; ?>
+                    </div>
+                <?php endif; ?>
+                <?= htmlspecialchars_decode($article['text']) ?>
+            </div>
+        </article>
 
-<?php if ($settings['thumb.show']): ?>
-    <img src="<?= $article['thumb']; ?>" style="max-width: 100%; display: block; margin: 0 auto;" alt=""/>
-<?php endif; ?>
-
-<?php if ($settings['tableContents.show'] && $article['table_contents']): ?>
-    <p><b>Оглавление:</b></p>
-    <?= $article['table_contents']; ?>
-<?php endif; ?>
-
-<?= htmlspecialchars_decode($article['text']) ?>
-
-<?php if ($related): ?>
-<h3><?= $settings['related.title'] ?></h3>
-<div class="row">
-    <?php foreach ($related as $article): ?>
-        <div class="col-12 col-md-4">
-            <div class="card">
-                <a href="<?= Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
-                    <img style="height: 200px; object-fit: cover" src="<?= $article['thumb'] ?>" class="card-img-top" alt="<?= $article['title'] ?>">
-                </a>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="<?= Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
-                            <?= $article['title'] ?>
-                        </a>
-                    </h5>
+        <?php if ($related): ?>
+            <div class="b-related">
+                <?php if (!empty($settings['related.title'])): ?>
+                    <div class="b-related__header">
+                        <span><?= $settings['related.title'] ?></span>
+                    </div>
+                <?php endif; ?>
+                <div class="b-related__items">
+                    <?php foreach ($related as $article): ?>
+                        <article class="post-card post">
+                            <div class="post-card__image">
+                                <a href="<?= Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>">
+                                    <?php if ($article['thumb']): ?>
+                                        <img width="330" height="140"
+                                             src="<?= $article['thumb'] ?>"
+                                             class="attachment-thumb-wide size-thumb-wide wp-post-image"
+                                             alt="<?= $article['title'] ?>" loading="lazy" itemprop="image"
+                                        />
+                                    <?php endif; ?>
+                                </a>
+                            </div>
+                            <header class="entry-header">
+                                <div class="entry-title">
+                                    <a href="<?= Url::to(['article/view', 'id' => $article['id'], 'slug' => $article['slug']]) ?>" rel="bookmark"><?= $article['title'] ?></a>
+                                </div>
+                            </header>
+                        </article>
+                    <?php endforeach; ?>
                 </div>
             </div>
-        </div>
-    <?php endforeach; ?>
+        <?php endif; ?>
+
+        <meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://winda10.com/drajvera-i-plaginy/otklyuchenie-proverki-podpisi-drayverov-windows-10.html">
+        <meta itemprop="dateModified" content="2018-12-27">
+        <meta itemprop="datePublished" content="2018-12-27T13:23:05+03:00">
+    </main>
 </div>
-<?php endif; ?>

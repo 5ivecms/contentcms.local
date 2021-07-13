@@ -6,9 +6,7 @@ use common\models\Article;
 use common\models\Keyword;
 use common\models\Setting;
 use common\models\Tools;
-use Curl\Curl;
 use Curl\MultiCurl;
-use yii\helpers\ArrayHelper;
 
 class GenerateArticles
 {

@@ -27,7 +27,8 @@
         "andreskrey/readability.php": "^2.1",
         "electrolinux/phpquery": "^0.9.6",
         "2amigos/yii2-ckeditor-widget" : "~2.1",
-        "samdark/sitemap": "^2.2"
+        "samdark/sitemap": "^2.2",
+        "mihaildev/yii2-elfinder": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

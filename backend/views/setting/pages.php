@@ -21,6 +21,14 @@ $pages = [
         'title' => 'Статья',
         'url' => Url::to(['setting/page-article'])
     ],
+    [
+        'title' => 'Правообладателям',
+        'url' => Url::to(['setting/page-dmca'])
+    ],
+    [
+        'title' => 'Политика конфиденциальности',
+        'url' => Url::to(['setting/page-privacy'])
+    ],
 ];
 
 $provider = new ArrayDataProvider([

@@ -25,7 +25,7 @@ use yii\helpers\Url;
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a href="<?=  Yii::$app->urlManagerFrontEnd->createUrl(['/site/index']) ?>" target="_blank" class="nav-link" title="Сайт">
+            <a href="<?= Yii::$app->urlManagerFrontEnd->createUrl(['/site/index']) ?>" target="_blank" class="nav-link" title="Сайт">
                 <i class="nav-icon fas fa-globe mr-1"></i>
             </a>
         </li>

@@ -51,11 +51,15 @@ class SettingController extends BaseController
         $metaDescriptionSettings = Setting::find()->where(['like', 'option', 'metaDescription.'])->all();
         $metaDescriptionSettings = Setting::prepareSettingsForForms($metaDescriptionSettings);
 
+        $brandingSettings = Setting::find()->where(['like', 'option', 'site.'])->all();
+        $brandingSettings = Setting::prepareSettingsForForms($brandingSettings);
+
         return $this->render('base', [
             'themeSettings' => $themeSettings,
             'cacheSettings' => $cacheSettings,
             'shortTextSettings' => $shortTextSettings,
-            'metaDescriptionSettings' => $metaDescriptionSettings
+            'metaDescriptionSettings' => $metaDescriptionSettings,
+            'brandingSettings' => $brandingSettings
         ]);
     }
 
@@ -161,6 +165,26 @@ class SettingController extends BaseController
         $settings = Setting::prepareSettingsForForms($settings);
 
         return $this->render('pages/_article', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function actionPageDmca()
+    {
+        $settings = Setting::find()->where(['like', 'option', 'page.dmca'])->all();
+        $settings = Setting::prepareSettingsForForms($settings);
+
+        return $this->render('pages/_dmca', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function actionPagePrivacy()
+    {
+        $settings = Setting::find()->where(['like', 'option', 'page.privacy'])->all();
+        $settings = Setting::prepareSettingsForForms($settings);
+
+        return $this->render('pages/_privacy', [
             'settings' => $settings
         ]);
     }

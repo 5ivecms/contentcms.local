@@ -18,7 +18,11 @@ $selectedOptions = [
 ?>
 
 <div class="article-index">
-
+    <style>
+        .action-cell a {
+            margin: 0 2px;
+        }
+    </style>
     <?= GridView::widget([
         'id' => 'article-gridview',
         'dataProvider' => $dataProvider,
@@ -31,11 +35,23 @@ $selectedOptions = [
                     return ['value' => $model->id];
                 },
             ],
-
+            'id',
             'title',
             'views',
 
-            ['class' => '\kartik\grid\ActionColumn'],
+            [
+                'class' => 'kartik\grid\ActionColumn',
+                'width' => '90px',
+                'header' => '',
+                'headerOptions' => ['style' => 'width:90px', 'class' => 'action-cell'],
+                'contentOptions' => ['style' => 'width:90px', 'class' => 'action-cell'],
+                'template' => '{view}{update}{delete}{statisticUpdate}',
+                'buttons' => [
+                    'statisticUpdate' => function ($url, $model) {
+                        return Html::a('<span class="fas fa-globe"></span>', Yii::$app->urlManagerFrontEnd->createUrl(['/article/view', 'id' => $model->id, 'slug' => $model->slug]), ['target' => '_blank']);
+                    },
+                ],
+            ],
         ],
         'toolbar' => [
             [

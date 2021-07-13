@@ -10,12 +10,12 @@ class ThemeAsset extends AssetBundle
     public $basePath = '@frontend/themes/basic';
     public $baseUrl = '@web/themes/basic';
     public $css = [
-        //'assets/style/style.min.css',
-        'assets/style/bootstrap/bootstrap.css',
+        //'assets/style/bootstrap/bootstrap.css',
+        'assets/style/style.min.css',
     ];
     public $js = [
-        'assets/js/lazyload.min.js',
-        'assets/js/main.js'
+        //'assets/js/lazyload.min.js',
+        'assets/js/main.min.js'
     ];
     public $depends = [
     ];

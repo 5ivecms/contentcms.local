@@ -32,7 +32,7 @@ $selectedOptions = [
                     return ['value' => $model->id];
                 },
             ],
-
+            'id',
             'keyword',
             [
                 'class' => 'kartik\grid\BooleanColumn',

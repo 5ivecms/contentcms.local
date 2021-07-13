@@ -183,4 +183,19 @@ class Setting extends \yii\db\ActiveRecord
     {
         return self::getGroupSettings('cron', false);
     }
+
+    public static function getBrandingSettings()
+    {
+        return self::getGroupSettings('site', false);
+    }
+
+    public static function getDmcaPageSettings()
+    {
+        return self::getGroupSettings('page.dmca', false);
+    }
+
+    public static function getPrivacyPageSettings()
+    {
+        return self::getGroupSettings('page.privacy', false);
+    }
 }

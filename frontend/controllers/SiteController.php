@@ -44,10 +44,34 @@ class SiteController extends BaseController
     {
         $articles = Article::find()->where(new \yii\db\Expression('title LIKE :term', [':term' => '%' . $query . '%']))->limit(30)->asArray()->all();
         $pageTitle = 'Поиск "' . $query . '"';
+        $this->setMetaTags($pageTitle, $pageTitle);
+        $this->setOpenGraph($pageTitle, $pageTitle);
 
         return $this->render('search', [
             'articles' => $articles,
             'pageTitle' => $pageTitle
+        ]);
+    }
+
+    public function actionDmca()
+    {
+        $settings = Setting::getDmcaPageSettings();
+        $this->setMetaTags($settings['metaTitle'], $settings['metaDescription']);
+        $this->setOpenGraph($settings['metaTitle'], $settings['metaDescription']);
+
+        return $this->render('dmca', [
+            'settings' => $settings
+        ]);
+    }
+
+    public function actionPrivacy()
+    {
+        $settings = Setting::getPrivacyPageSettings();
+        $this->setMetaTags($settings['metaTitle'], $settings['metaDescription']);
+        $this->setOpenGraph($settings['metaTitle'], $settings['metaDescription']);
+
+        return $this->render('privacy', [
+            'settings' => $settings
         ]);
     }
 }

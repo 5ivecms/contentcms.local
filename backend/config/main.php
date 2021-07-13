@@ -54,5 +54,22 @@ return [
 
         'urlManagerFrontEnd' => require __DIR__ . '/../../frontend/config/_urlManager.php'
     ],
+
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@'],
+            'disabledCommands' => ['netmount'],
+            'roots' => [
+                [
+                    'baseUrl' => '@storageFolder',
+                    'basePath' => '@storage',
+                    'path' => 'logos',
+                    'name' => 'Основная папка'
+                ]
+            ]
+        ]
+    ],
+
     'params' => $params,
 ];

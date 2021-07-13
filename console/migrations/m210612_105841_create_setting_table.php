@@ -414,6 +414,71 @@ class m210612_105841_create_setting_table extends Migration
             'default' => 1,
             'label' => 'Количество ключевых слов'
         ]);
+
+        // Настройки брендирования
+        $this->insert('{{%setting}}', [
+            'option' => 'site.title',
+            'value' => 'Статьи',
+            'default' => 'Статьи',
+            'label' => 'Заголовок сайта'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'site.description',
+            'value' => 'Лучше статьи',
+            'default' => 'Лучше статьи',
+            'label' => 'Описание сайта'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'site.logo',
+            'value' => '',
+            'default' => '',
+            'label' => 'Лого сайта'
+        ]);
+
+        // Настройки страниц
+        $this->insert('{{%setting}}', [
+            'option' => 'page.dmca.text',
+            'value' => '',
+            'default' => '',
+            'label' => 'Текст'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'page.dmca.metaTitle',
+            'value' => 'Правообладателям',
+            'default' => 'Правообладателям',
+            'label' => 'Meta Title'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'page.dmca.metaDescription',
+            'value' => 'Правообладателям',
+            'default' => 'Правообладателям',
+            'label' => 'Meta Description'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'page.privacy.text',
+            'value' => '',
+            'default' => '',
+            'label' => 'Текст'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'page.privacy.metaTitle',
+            'value' => 'Политика конфиденциальности',
+            'default' => 'Политика конфиденциальности',
+            'label' => 'Meta Title'
+        ]);
+
+        $this->insert('{{%setting}}', [
+            'option' => 'page.privacy.metaDescription',
+            'value' => 'Политика конфиденциальности',
+            'default' => 'Политика конфиденциальности',
+            'label' => 'Meta Description'
+        ]);
     }
 
     /**

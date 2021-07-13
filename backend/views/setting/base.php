@@ -4,6 +4,7 @@
 /* @var $themeSettings array */
 /* @var $shortTextSettings array */
 /* @var $metaDescriptionSettings array */
+/* @var $brandingSettings array */
 
 $this->title = 'Базовые настройки';
 
@@ -17,6 +18,7 @@ $this->title = 'Базовые настройки';
         <?= $this->render('base/_metaDescription', ['settings' => $metaDescriptionSettings]) ?>
     </div>
     <div class="col-12 col-md-6">
+        <?= $this->render('base/_branding', ['settings' => $brandingSettings]);?>
         <?= $this->render('base/_cache', ['settings' => $cacheSettings]);?>
     </div>
 </div>

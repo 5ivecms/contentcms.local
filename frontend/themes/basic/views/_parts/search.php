@@ -4,13 +4,11 @@ use yii\bootstrap4\Html;
 use yii\helpers\Url;
 
 ?>
-<div class="navbar-search">
-    <?= Html::beginForm([Url::to(['site/search'])], 'get', ['enctype' => 'multipart/form-data', 'class' => 'd-flex']) ?>
-    <div class="input-group">
-        <?= Html::input('text', 'query', '', ['class' => 'form-control', 'placeholder' => 'Поиск']) ?>
-        <div class="input-group-append">
-            <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'btn btn-secondary']) ?>
-        </div>
-    </div>
+
+<div id="search-2" class="widget widget_search">
+    <?= Html::beginForm([Url::to(['site/search'])], 'get', ['role' => 'search', 'enctype' => 'multipart/form-data', 'id' => 'searchform', 'class' => 'search-form']) ?>
+    <?= Html::label('Поиск:', 's', ['class' => 'screen-reader-text']) ?>
+    <?= Html::input('text', 'query', '', ['id' => 's', 'class' => 'search-form__text', 'placeholder' => 'Поиск']) ?>
+    <?= Html::submitButton('', ['id' => 'searchsubmit', 'class' => 'search-form__submit']) ?>
     <?= Html::endForm() ?>
 </div>
