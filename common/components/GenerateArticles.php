@@ -6,6 +6,7 @@ use common\models\Article;
 use common\models\Keyword;
 use common\models\Setting;
 use common\models\Tools;
+use Curl\Curl;
 use Curl\MultiCurl;
 
 class GenerateArticles
@@ -191,9 +192,10 @@ class GenerateArticles
         $multiCurl->setOpt(CURLOPT_HTTPGET, true);
         $multiCurl->setOpt(CURLOPT_FRESH_CONNECT, 1);
         $multiCurl->setOpt(CURLOPT_FOLLOWLOCATION, 1);
-        $multiCurl->setOpt(CURLOPT_TIMEOUT, 60);
-        $multiCurl->setHeader('Authorization', 'Bearer ' . $this->getApiToken());
+        $multiCurl->setOpt(CURLOPT_TIMEOUT, 30);
+        //$multiCurl->setHeader('Authorization', 'Bearer ' . $this->getApiToken());
         $multiCurl->success(function($instance) {
+            //var_dump('success');
             $keyword = $this->findKeywordByKeyword($instance->response->keyword);
             if (isset($instance->response->content) && !empty($instance->response->content)) {
                 $this->addArticles($instance->response);
@@ -205,6 +207,9 @@ class GenerateArticles
             $keyword->save();
         });
         $multiCurl->error(function($instance) {
+            /*echo $instance->errorCode . ' - ' . $instance->errorMessage . '<br>';
+            echo 'URL: ' . $instance->url;
+            echo '<hr>';*/
             if (isset($instance->response->keyword)) {
                 $keyword = $this->findKeywordByKeyword($instance->response->keyword);
                 $this->addErrors($keyword->keyword . ': ' . $instance->errorMessage);
@@ -221,7 +226,12 @@ class GenerateArticles
             if (!isset($this->getApiHosts()[$indexHost])) {
                 continue;
             }
-            $multiCurl->addGet(trim($this->getApiHosts()[$indexHost], '/') . self::BASE_GENERATE_API_URL, [
+
+            $curl = new Curl();
+            $curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
+            $curl->setTimeout(60);
+            $curl->setHeader('Authorization', 'Bearer ' . $this->getApiToken());
+            $curl->setUrl(trim($this->getApiHosts()[$indexHost], '/') . self::BASE_GENERATE_API_URL, [
                 'keyword' => $keyword->keyword,
                 'mode' => $this->getMode(),
                 'pagesLimit' => $this->getPagesLimit(),
@@ -229,6 +239,8 @@ class GenerateArticles
                 'chunkLimit' => $this->getChunkLimit(),
                 'startPage' => $this->getStartPage()
             ]);
+            $multiCurl->addCurl($curl);
+
             $indexHost++;
             if ($indexHost === count($this->getArticles())) {
                 $indexHost = 0;

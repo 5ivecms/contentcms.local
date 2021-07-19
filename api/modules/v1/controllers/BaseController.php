@@ -32,16 +32,16 @@ class BaseController extends Controller
                 'application\xml' => Response::FORMAT_XML,
             ]
         ];
-        $behaviors['authenticator']['only'] = ['create', 'update', 'delete', 'view', 'options', 'index'];
-        //$behaviors['authenticator']['only'] = ['create', 'update', 'delete', 'view', 'options'];
+        //$behaviors['authenticator']['only'] = ['create', 'update', 'delete', 'view', 'options', 'index'];
+        $behaviors['authenticator']['only'] = ['create', 'update', 'delete', 'view', 'options'];
         $behaviors['authenticator']['authMethods'] = [
             HttpBasicAuth::className(),
             HttpBearerAuth::className(),
         ];
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['create', 'update', 'delete', 'view', 'options', 'index'],
-            //'only' => ['create', 'update', 'delete', 'view', 'options'],
+            //'only' => ['create', 'update', 'delete', 'view', 'options', 'index'],
+            'only' => ['create', 'update', 'delete', 'view', 'options'],
             'rules' => [
                 [
                     'allow' => true,

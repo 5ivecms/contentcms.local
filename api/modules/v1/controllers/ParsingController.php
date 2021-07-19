@@ -11,6 +11,7 @@ class ParsingController extends BaseController
     public function actionIndex()
     {
         $start = microtime(true);
+
         $settings = Setting::getContentApiSettings();
         $hosts = explode("\r\n", $settings['host']);
         $keywords = Keyword::find()
@@ -22,11 +23,12 @@ class ParsingController extends BaseController
         $generateArticles = new GenerateArticles();
         $generateArticles->setKeywords($keywords);
         $generateArticles->generate();
-
         $finish = microtime(true);
 
         $delta = $finish - $start;
 
-        return $delta . ' сек.';
+        echo 'Время выполнения: ' .  $delta . ' сек.';
+
+        die;
     }
 }
